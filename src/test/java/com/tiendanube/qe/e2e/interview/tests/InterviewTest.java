@@ -1,6 +1,7 @@
 package com.tiendanube.qe.e2e.interview.tests;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -24,31 +25,43 @@ public class InterviewTest {
     @Test
     public void loginTest() {
         //Login
-        driver.findElement(By.id("user-mail")).sendKeys("automation+interview@tiendanube.com");
-        driver.findElement(By.id("pass")).sendKeys("Interview123");
-        driver.findElement(By.cssSelector("input.btn")).click();
-        Assert.assertTrue(driver.findElement(By.id("lifecycle-cards")).isDisplayed(), "The dashboard's cards should be visible.");
+        WebElement userMailTxt = driver.findElement(By.id("user-mail"));
+        WebElement userPasswordTxt = driver.findElement(By.id("pass"));
+        WebElement loginBtn = driver.findElement(By.cssSelector("input.btn"));
+
+        userMailTxt.sendKeys("automation+interview@tiendanube.com");
+        userPasswordTxt.sendKeys("Interview123");
+        loginBtn.click();
 
         //Menu Navigation
-        driver.findElement(By.cssSelector("li[data-code=products]")).click();
-        driver.findElement(By.cssSelector("a[data-qe-id=product_new-menu-secondary]")).click();
+        WebElement productsMenu = driver.findElement(By.cssSelector("li[data-code=products]"));
+        WebElement newProductMenu = driver.findElement(By.cssSelector("a[data-qe-id=product_new-menu-secondary]"));
+
+        productsMenu.click();
+        newProductMenu.click();
 
         //product publication
-        WebDriverWait wait = new WebDriverWait(driver, 3);
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("name-container"))));
-        Assert.assertTrue(driver.findElement(By.id("name-container")).isDisplayed());
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.id("lifecycle-cards"))));
 
-        driver.findElement(By.cssSelector("input[id^='name-'")).sendKeys("Player's Handbook");
-        driver.findElement(By.id("price")).sendKeys("100");
-        driver.findElement(By.id("stock")).sendKeys("100");
+        WebElement productNameTxt = driver.findElement(By.cssSelector("input[id^='name-'"));
+        WebElement productPriceTxt = driver.findElement(By.id("price"));
+        WebElement productStockTxt = driver.findElement(By.id("stock"));
+        WebElement submitBtn = driver.findElement(By.id("submit-button"));
+
+
+        productNameTxt.sendKeys("Player's Handbook");
+        productPriceTxt.sendKeys("100");
+        productStockTxt.sendKeys("100");
 
         driver.switchTo().frame(1);
-        driver.findElement(By.cssSelector("body")).sendKeys("Prueba 123");
+        WebElement iFrameBody = driver.findElement(By.cssSelector("body"));
+        iFrameBody.sendKeys("Producto de prueba");
         driver.switchTo().parentFrame();
 
-        driver.findElement(By.id("submit-button")).click();
-        Assert.assertTrue(driver.findElement(By.cssSelector("div.alert-success")).isDisplayed());
-
+        submitBtn.click();
+        WebElement alertMsg = driver.findElement(By.cssSelector("div.alert-success"));
+        Assert.assertTrue(alertMsg.isDisplayed());
     }
 
     @AfterTest
