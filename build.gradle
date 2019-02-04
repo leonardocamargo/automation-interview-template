@@ -1,0 +1,39 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+        resources {
+            srcDirs = ['src/main/resources']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['src/test/java']
+        }
+        resources {
+            srcDirs = ['src/test/resources']
+        }
+    }
+}
+
+dependencies {
+
+    testCompile 'org.testng:testng:+'
+    testCompile 'org.seleniumhq.selenium:selenium-java:+'
+
+}
+
+task e2e(type: Test) {
+    useTestNG()
+    outputs.upToDateWhen { false }
+
+    include '**/InterviewTest.class'
+}
