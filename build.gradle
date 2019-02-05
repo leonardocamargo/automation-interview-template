@@ -25,10 +25,8 @@ sourceSets {
 }
 
 dependencies {
-
     testCompile 'org.testng:testng:+'
-    testCompile 'org.seleniumhq.selenium:selenium-java:+'
-
+    compile 'org.seleniumhq.selenium:selenium-java:+'
 }
 
 task e2e(type: Test) {
