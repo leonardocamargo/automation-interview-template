@@ -7,12 +7,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class NewProductPageObject {
+public class NewProductPageObject extends BasePageObject {
 
-    private final WebDriver driver;
-    private final WebDriverWait wait;
     @FindBy(css = "input[id^='name-'")
     private WebElement productNameTxt;
     @FindBy(id = "price")
@@ -25,8 +22,7 @@ public class NewProductPageObject {
     private WebElement alertMsg;
 
     NewProductPageObject(WebDriver driver) {
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, 5);
+        super(driver);
         PageFactory.initElements(driver, this);
         wait.until(ExpectedConditions.visibilityOf(productNameTxt));
     }
@@ -52,4 +48,5 @@ public class NewProductPageObject {
     public boolean wasCreated() {
         return alertMsg.isDisplayed();
     }
+
 }

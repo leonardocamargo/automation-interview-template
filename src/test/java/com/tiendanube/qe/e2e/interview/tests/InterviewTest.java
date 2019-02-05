@@ -2,14 +2,14 @@ package com.tiendanube.qe.e2e.interview.tests;
 
 import com.tiendanube.qe.e2e.interview.datamodel.Product;
 import com.tiendanube.qe.e2e.interview.datamodel.ProductBuilder;
-import com.tiendanube.qe.e2e.interview.pageobjects.DashboardPageObject;
 import com.tiendanube.qe.e2e.interview.pageobjects.LoginPageObject;
-import com.tiendanube.qe.e2e.interview.pageobjects.NewProductPageObject;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
+import java.util.ArrayList;
 
 public class InterviewTest {
     private ChromeDriver driver;
@@ -25,9 +25,9 @@ public class InterviewTest {
 
     @Test
     public void loginTest() {
-        String userEmail = "automation+interview@tiendanube.com";
-        String userPassword = "Interview123";
-        Product newProduct = new ProductBuilder()
+        final String userEmail = "automation+interview@tiendanube.com";
+        final String userPassword = "Interview123";
+        final Product newProduct = new ProductBuilder()
                 .with($ -> {
                     $.name = "Player's Handbook";
                     $.price = "100";
@@ -36,11 +36,18 @@ public class InterviewTest {
                 })
                 .createProduct();
 
-        LoginPageObject loginPage = new LoginPageObject(driver);
-        DashboardPageObject dashboardPage = loginPage.logAs(userEmail, userPassword);
-        NewProductPageObject newProductPage = dashboardPage.navigateToNewProductPage();
-        newProductPage.createProduct(newProduct);
-        Assert.assertTrue(newProductPage.wasCreated());
+        final ArrayList<Product> productsList = new LoginPageObject(driver)
+                .logAs(userEmail, userPassword)
+                .navigateToNewProductPage()
+                .createProduct(newProduct)
+                .navigateToMyProductsPage()
+                .getProductsList();
+
+        final Product actualProduct = productsList.stream().filter(product -> product.getName().equals("Player's Handbook")).findFirst().orElse(null);
+        Assert.assertNotNull(actualProduct, "The expected product was not found in the product list.");
+        Assert.assertEquals(actualProduct.getName(), newProduct.getName(), "The product name does not match.");
+        Assert.assertEquals(actualProduct.getPrice(), newProduct.getPrice(), "The product price does not match.");
+        Assert.assertEquals(actualProduct.getStock(), newProduct.getStock(), "The product stock does not match.");
     }
 
     @AfterTest
