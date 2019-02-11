@@ -3,7 +3,8 @@ package com.tiendanube.qe.e2e.interview.pageobjects;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+
+import static org.openqa.selenium.support.PageFactory.initElements;
 
 class MenuPageObject {
 
@@ -20,8 +21,7 @@ class MenuPageObject {
 
     MenuPageObject(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver, this);
-
+        initElements(driver, this);
     }
 
     NewProductPageObject newProduct() {
@@ -41,8 +41,4 @@ class MenuPageObject {
         return new MyProductsPageObject(driver);
     }
 
-    DashboardPageObject dashboard() {
-        dashboardMenu.click();
-        return new DashboardPageObject(driver);
-    }
 }

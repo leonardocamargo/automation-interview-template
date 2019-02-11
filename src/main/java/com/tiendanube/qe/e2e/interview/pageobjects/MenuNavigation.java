@@ -6,5 +6,4 @@ public interface MenuNavigation {
 
     MyProductsPageObject navigateToMyProductsPage();
 
-    DashboardPageObject navigateToDashboardPage();
 }

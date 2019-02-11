@@ -3,7 +3,8 @@ package com.tiendanube.qe.e2e.interview.pageobjects;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+
+import static org.openqa.selenium.support.PageFactory.initElements;
 
 public class LoginPageObject {
 
@@ -17,7 +18,7 @@ public class LoginPageObject {
 
     public LoginPageObject(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver, this);
+        initElements(driver, this);
     }
 
     public DashboardPageObject logAs(String userEmail, String userPassword) {

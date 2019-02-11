@@ -4,12 +4,14 @@ import com.tiendanube.qe.e2e.interview.datamodel.Product;
 import com.tiendanube.qe.e2e.interview.datamodel.ProductBuilder;
 import com.tiendanube.qe.e2e.interview.pageobjects.LoginPageObject;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 
 public class InterviewTest {
     private ChromeDriver driver;
@@ -36,7 +38,7 @@ public class InterviewTest {
                 })
                 .createProduct();
 
-        final ArrayList<Product> productsList = new LoginPageObject(driver)
+        final List<Product> productsList = new LoginPageObject(driver)
                 .logAs(userEmail, userPassword)
                 .navigateToNewProductPage()
                 .createProduct(newProduct)
@@ -44,10 +46,10 @@ public class InterviewTest {
                 .getProductsList();
 
         final Product actualProduct = productsList.stream().filter(product -> product.getName().equals("Player's Handbook")).findFirst().orElse(null);
-        Assert.assertNotNull(actualProduct, "The expected product was not found in the product list.");
-        Assert.assertEquals(actualProduct.getName(), newProduct.getName(), "The product name does not match.");
-        Assert.assertEquals(actualProduct.getPrice(), newProduct.getPrice(), "The product price does not match.");
-        Assert.assertEquals(actualProduct.getStock(), newProduct.getStock(), "The product stock does not match.");
+        assertNotNull(actualProduct, "The expected product was not found in the product list.");
+        assertEquals(actualProduct.getName(), newProduct.getName(), "The product name does not match.");
+        assertEquals(actualProduct.getPrice(), newProduct.getPrice(), "The product price does not match.");
+        assertEquals(actualProduct.getStock(), newProduct.getStock(), "The product stock does not match.");
     }
 
     @AfterTest

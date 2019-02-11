@@ -6,11 +6,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.openqa.selenium.support.PageFactory.initElements;
 
 public class MyProductsPageObject extends BasePageObject {
 
@@ -20,15 +21,14 @@ public class MyProductsPageObject extends BasePageObject {
     private List<WebElement> productRows;
 
 
-    public MyProductsPageObject(WebDriver driver) {
+    MyProductsPageObject(WebDriver driver) {
         super(driver);
-        PageFactory.initElements(driver, this);
+        initElements(driver, this);
         wait.until(ExpectedConditions.visibilityOf(productTable));
-
     }
 
-    public ArrayList<Product> getProductsList() {
-        ArrayList<Product> productsList = new ArrayList<>();
+    public List<Product> getProductsList() {
+        List<Product> productsList = new ArrayList<>();
         productRows.iterator().forEachRemaining(product ->
                 productsList.add(new ProductBuilder().with($ -> {
                             $.name = product.findElement(By.cssSelector("td.product-table_product-name")).getText();

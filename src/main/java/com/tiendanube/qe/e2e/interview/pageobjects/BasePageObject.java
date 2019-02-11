@@ -26,8 +26,4 @@ public abstract class BasePageObject implements MenuNavigation {
         return menu.myProducts();
     }
 
-    @Override
-    public DashboardPageObject navigateToDashboardPage() {
-        return menu.dashboard();
-    }
 }
