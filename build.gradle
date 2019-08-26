@@ -27,6 +27,9 @@ sourceSets {
 dependencies {
     testCompile 'org.testng:testng:+'
     compile 'org.seleniumhq.selenium:selenium-java:+'
+    compile 'io.github.bonigarcia:webdrivermanager:3.6.2'
+    compile 'org.slf4j:slf4j-api:+'
+    compile 'org.slf4j:slf4j-log4j12:+'
 }
 
 task e2e(type: Test) {
