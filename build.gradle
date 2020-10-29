@@ -25,16 +25,27 @@ sourceSets {
 }
 
 dependencies {
-    testCompile 'org.testng:testng:+'
-    compile 'org.seleniumhq.selenium:selenium-java:+'
-    compile 'io.github.bonigarcia:webdrivermanager:3.6.2'
-    compile 'org.slf4j:slf4j-api:+'
-    compile 'org.slf4j:slf4j-log4j12:+'
+    testImplementation 'io.cucumber:cucumber-java:5.7.0'
+    testImplementation 'io.cucumber:cucumber-testng:5.7.0'
+    testImplementation 'org.testng:testng:+'
+    implementation 'org.seleniumhq.selenium:selenium-java:+'
+    implementation 'com.codeborne:selenide:5.11.1'
+    testImplementation 'io.github.bonigarcia:webdrivermanager:+'
+    implementation 'org.slf4j:slf4j-api:+'
+    implementation 'org.slf4j:slf4j-log4j12:+'
+    implementation 'org.slf4j:slf4j-api:+'
 }
 
-task e2e(type: Test) {
+task runTestng(type: Test) {
     useTestNG()
     outputs.upToDateWhen { false }
 
     include '**/InterviewTest.class'
+}
+
+task runCucumber(type: Test) {
+    useTestNG()
+    outputs.upToDateWhen { false }
+
+    include '**/CucumberRunner.class'
 }
