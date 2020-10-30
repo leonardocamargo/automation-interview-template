@@ -21,17 +21,6 @@ public class InterviewTest {
     driver.manage().window().maximize();
   }
 
-  @Test
-  public void createProductTest() {
-    //ARRANGE
-    final String userEmail = "automation+interview@tiendanube.com";
-    final String userPassword = "interview123";
-
-    //ACT
-    new LoginPageObject(driver).logAs(userEmail, userPassword);
-
-  }
-
   @AfterTest
   public void tearDown() {
     driver.close();

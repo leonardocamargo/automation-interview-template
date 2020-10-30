@@ -1,4 +1,4 @@
-package com.tiendanube.qe.e2e.interview.stepsdefinition;
+package com.tiendanube.qe.e2e.interview.stepdefinitions;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
