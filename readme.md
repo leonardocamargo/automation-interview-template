@@ -1,4 +1,4 @@
-#HOW TO USE THIS REPOSITORY
+# HOW TO USE THIS REPOSITORY
 ## Getting started
 
 ### Installing necessary software
