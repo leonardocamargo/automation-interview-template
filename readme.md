@@ -7,20 +7,18 @@
 
 *  **(Linux/Mac OS X only)** Generate your [ssh keys](https://help.github.com/articles/generating-ssh-keys/).
 
-* Install [Java 8 JDK](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-
-* Install [gradle](https://gradle.org/install/)
+* Install [Java OpenJDK 8](https://adoptopenjdk.net/)
 
 * Clone the project using SHH or HTTPS
 
 ### Develop scenarios
 
-#### Cucumber
-- Create your step definitions inside the package `com.tiendanube.qe.e2e.interview.stepdefinitions`
+#### For Cucumber
+- Create your step definitions inside the package `com.tiendanube.testharness.interview.cucumber.stepdefinitions`
 - Create your feature files inside the folder `src/test/resources/features`
 
-#### TestNG
-- Create your test methods in the class InterviewTest located in the package `com.tiendanube.qe.e2e.interview.tests`
+#### For TestNG
+- Create your test methods in the class InterviewTest located in the package `com.tiendanube.testharness.interview.testng`
 
 
 ### Running the scenarios
