@@ -1,4 +1,4 @@
-package com.tiendanube.qe.e2e.interview.tests;
+package com.tiendanube.testharness.interview.testng;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.chrome.ChromeDriver;
